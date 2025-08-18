@@ -14,9 +14,9 @@ import pandas as pd
 # ========= 配置（只改这里） =========
 CONFIG = {
     # CSV 路径（可用绝对路径；相对路径是相对本 .py 文件）
-    "CUST_CSV": r"customers_snapped_r200.csv",
+    "CUST_CSV": r"f:\git_local\scm_deeponet\data\customers_snapped_5km.csv",
     # 输出目录（会自动创建 S001/S002/...）
-    "OUT_DIR":  r"scenarios",
+    "OUT_DIR":  r"f:\git_local\scm_deeponet\scenarios",
     # 场景数量
     "SCENARIOS": 6,
     # 基础车辆数（每个场景会乘以 MULTIPLIERS[k] 做强度变化）
