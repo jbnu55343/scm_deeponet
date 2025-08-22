@@ -1,0 +1,26 @@
+Loading net-file from 'net/shanghai_5km.net.xml' ... done (1089ms).
+Loading additional-files from 'scenarios/common.types.xml' ... done (1ms).
+Loading additional-files from 'scenarios/S001/edgedump.add.xml' ... done (8ms).
+Loading route-files from 'scenarios/S001/routes.rou.xml' ... done (75ms).
+Loading done.
+Simulation version 1.24.0 started with time: 0.00.
+Warning: Teleporting vehicle 'veh001_1324'; waited too long (yield), lane='178583695#1_0', time=26554.00.
+Warning: Vehicle 'veh001_1324' ends teleporting on edge '1100626100', time=26554.00.
+Warning: Teleporting vehicle 'veh001_468'; waited too long (yield), lane='1223689725#2_1', time=27039.00.
+Warning: Vehicle 'veh001_468' ends teleporting on edge '1085107696', time=27045.00.
+Warning: Teleporting vehicle 'veh001_2087'; waited too long (yield), lane='1223689725#2_1', time=28029.00.
+Warning: Vehicle 'veh001_2087' ends teleporting on edge '1085107696', time=28029.00.
+Warning: Teleporting vehicle 'veh001_2469'; waited too long (jam), lane='1223689725#2_1', time=28388.00.
+Warning: Vehicle 'veh001_2469' ends teleporting on edge '1085107696', time=28395.00.
+Warning: Teleporting vehicle 'veh001_1909'; waited too long (yield), lane='1223689725#2_1', time=28839.00.
+Warning: Vehicle 'veh001_1909' ends teleporting on edge '1085107696', time=28839.00.
+Warning: Teleporting vehicle 'veh001_1964'; waited too long (yield), lane='1223689725#2_1', time=29145.00.
+Warning: Vehicle 'veh001_1964' ends teleporting on edge '1085107696', time=29145.00.
+Warning: Teleporting vehicle 'veh001_835'; waited too long (yield), lane='1223689725#1_1', time=29157.00.
+Warning: Vehicle 'veh001_835' ends teleporting on edge '1223689725#2', time=29157.00.
+Warning: Teleporting vehicle 'veh001_775'; waited too long (jam), lane='178583695#1_0', time=30586.00.
+Warning: Vehicle 'veh001_775' ends teleporting on edge '1064476625#0', time=30593.00.
+Warning: Teleporting vehicle 'veh001_522'; waited too long (yield), lane='1223689725#2_1', time=30731.00.
+Warning: Vehicle 'veh001_522' ends teleporting on edge '1085107696', time=30734.00.
+Simulation ended at time: 35206.00.
+Reason: All vehicles have left the simulation.

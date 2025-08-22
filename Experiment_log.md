@@ -15,3 +15,8 @@
 - 结果：DeepONet test RMSE=..., 基线(MLP/TCN)=...
 - 发现/修复：未排序忽略→route-steps=0；vType=passenger→vtypes.add.xml
 - 产物：data/dataset_traffic_5km.npz, models/exp01.ckpt, figs/...
+
+
+
+
+20250820    已能够在GUI中将数据跑起来，下一步是用仿真生成数据以及构建数据集

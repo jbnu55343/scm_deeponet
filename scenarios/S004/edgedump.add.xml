@@ -1,0 +1,4 @@
+<additional>
+  <edgeData id="dump" begin="0" end="86400" freq="60"
+            file="edgedata.xml" excludeEmpty="true"/>
+</additional>

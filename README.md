@@ -42,3 +42,44 @@ flowchart TD
   DATA --> TRAIN(DeepONet)
 ```
 
+
+
+## 解决无法识别车辆类型的问题
+
+A) 新建一个通用的类型文件，并在运行时附加（推荐）
+
+在项目里建一个公共的类型文件（放在 scenarios 目录下，所有场景共用）：
+
+cat > scenarios/common.types.xml <<'XML'
+<additional>
+  <vType id="passenger" vClass="passenger"
+         accel="2.6" decel="4.5" sigma="0.5"
+         length="5.0" minGap="2.5"
+         maxSpeed="16.67" speedDev="0.1"
+         guiShape="passenger"/>
+</additional>
+XML
+
+用GUI查看路网及仿真
+用 --additional-files 把它一起加载（GUI 单场景举例）：
+
+sumo-gui -n net/shanghai_5km.net.xml \
+         -r scenarios/S001/routes.rou.xml \
+         --additional-files scenarios/common.types.xml \
+         --route-steps 0
+
+
+批量仿真（非 GUI），也一样带上这个 additional：
+
+NET="net/shanghai_5km.net.xml"
+for d in scenarios/S*; do
+  sumo -n "$NET" -r "$d/routes.rou.xml" \
+       --additional-files scenarios/common.types.xml \
+       --route-steps 0 \
+       --summary-output "$d/summary.xml" \
+       --tripinfo-output "$d/tripinfo.xml"
+done
+
+
+
+

@@ -1,0 +1,8 @@
+<additional>
+  <vType id="passenger"
+         accel="2.6" decel="4.5" sigma="0.5" length="5.0" maxSpeed="70"
+         guiShape="passenger" departSpeed="max" departLane="best"
+         laneChangeModel="SL2015"
+         device.rerouting.probability="1.0"
+         device.rerouting.adaptation-interval="60"/>
+</additional>
