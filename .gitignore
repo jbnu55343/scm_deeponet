@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+.venv/
+venv/
+.env/
+.DS_Store
+
+data/*.npz
+data/*/*.npz
+scenarios/*/edgedata.xml
+scenarios/*/tripinfo.xml
+scenarios/*/routes.rou.xml
+net/*.osm.xml
+net/*.net.xml
+models/*.pt
+artifacts/
