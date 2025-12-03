@@ -9,8 +9,21 @@ venv/
 .env/
 .DS_Store
 
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+*.pdf
+
+# Data
 data/
-data-3951152/
+# data-3951152/ (Uncommented to track paper)
 scenarios/*/edgedata.xml
 scenarios/*/tripinfo.xml
 scenarios/*/routes.rou.xml
