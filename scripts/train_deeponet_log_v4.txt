@@ -1,0 +1,19 @@
+Using device: cuda
+Loading data/dataset_sumo_5km_lag12_nonzero.npz...
+Loading split from data/sumo_split_nonzero.json...
+Starting training...
+Epoch 001 | Loss: 0.2969 | Val Loss: 0.2601 | MAE: 2.83 | R2: 0.7404 *
+Epoch 002 | Loss: 0.2680 | Val Loss: 0.2497 | MAE: 2.80 | R2: 0.7507 *
+Epoch 003 | Loss: 0.2587 | Val Loss: 0.2459 | MAE: 2.74 | R2: 0.7545 *
+Epoch 004 | Loss: 0.2536 | Val Loss: 0.2425 | MAE: 2.73 | R2: 0.7579 *
+Epoch 005 | Loss: 0.2497 | Val Loss: 0.2375 | MAE: 2.66 | R2: 0.7630 *
+Epoch 006 | Loss: 0.2464 | Val Loss: 0.2365 | MAE: 2.65 | R2: 0.7639 *
+Epoch 008 | Loss: 0.2416 | Val Loss: 0.2346 | MAE: 2.66 | R2: 0.7658 *
+Epoch 009 | Loss: 0.2394 | Val Loss: 0.2331 | MAE: 2.64 | R2: 0.7673 *
+forrtl: error (200): program aborting due to control-C event
+Image              PC                Routine            Line        Source             
+libifcoremd.dll    00007FFD61E6DF54  Unknown               Unknown  Unknown
+KERNELBASE.dll     00007FFE8977A09D  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFE89E3E8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFE8C048D9C  Unknown               Unknown  Unknown
+^C

@@ -1,0 +1,15 @@
+Using device: cuda
+Loading data/metr_la_lag12_temporal.npz...
+Y Mean: 57.07, Y Std: 20.06
+Starting training...
+Epoch 001 | Loss: 0.4043 | Val Loss: 0.2163 | MAE: 6.15 | R2: 0.9123 *
+Epoch 002 | Loss: 0.1385 | Val Loss: 0.0890 | MAE: 3.05 | R2: 0.9673 *
+Epoch 004 | Loss: 0.1194 | Val Loss: 0.0753 | MAE: 2.21 | R2: 0.9726 *
+Epoch 010 | Loss: 0.1089 | Val Loss: 0.1144 | MAE: 3.26 | R2: 0.9559
+Epoch 020 | Loss: 0.0914 | Val Loss: 0.1316 | MAE: 2.93 | R2: 0.9573
+Epoch 030 | Loss: 0.0890 | Val Loss: 0.2763 | MAE: 5.08 | R2: 0.8924
+Epoch 040 | Loss: 0.0820 | Val Loss: 0.1205 | MAE: 2.87 | R2: 0.9536
+Epoch 050 | Loss: 0.0714 | Val Loss: 0.2271 | MAE: 3.50 | R2: 0.9095
+
+[TEST] MAE: 2.74 | RMSE: 6.49 | R2: 0.9137
+FINAL_RESULT_JSON:{"model": "Transformer", "params": 582081, "time_sec": 72.93439817428589, "test_mae": 2.744722366333008, "test_rmse": 6.48764705657959, "test_r2": 0.9136838912963867}

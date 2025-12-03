@@ -1,0 +1,65 @@
+--- Start of rev3.docx ---
+Review Report Form
+Quality of English Language
+( ) The English could be improved to more clearly express the research.
+(x) The English is fine and does not require any improvement.
+
+Comments and Suggestions for Authors
+This manuscript presents a well-structured and timely study that applies a Deep Operator Network (DeepONet) to the challenging problem of short-term road speed forecasting in logistics contexts.
+The current model is inherently node-level or link-level, processing each road segment independently. The title and text use "macroscopic" forecasting, which often implies modeling network-wide spatial correlations (e.g., using Graph Neural Networks). The paper does not explicitly model the spatial dependencies between links.
+While the inference efficiency of the trained model is implied, a direct comparison of the training and inference times relative to the baselines (especially the simpler MLP and Ridge models) is missing.
+On Page 15, Figure 5 caption, "entered" is misspelled as "entered".
+On Page 16, in the "Limitations" section, the sentence "Limitations remain. our evaluation..." has a capitalization error ("our" should be "Our").
+Given that the model does not explicitly encode graph structure, how do you account for the potential propagation of congestion waves from adjacent links? Is the information contained in the entered/left and traveltime features sufficient to capture these effects?
+The ablation study shows that density and traveltime are the most critical trunk features. Did you observe any significant multicollinearity between these exogenous features, and if so, how does the Ridge regression baseline (which handles this well) perform relative to DeepONet in such cases?
+The simulation uses a 5km subnetwork. How scalable is the proposed framework to a larger, city-scale network? Would the branch-trunk factorization still hold its advantage, or would explicit spatial modeling become necessary?
+--- End of rev3.docx ---
+
+--- Start of rev4.docx ---
+Review Report Form
+Quality of English Language
+( ) The English could be improved to more clearly express the research.
+(x) The English is fine and does not require any improvement.
+Comments and Suggestions for Authors
+Operator Learning with Branch–Trunk Factorization for Macroscopic Short-Term Speed Forecasting
+ 
+Literature Section
+Most of the references are rather old. It is suggested that some references from the past three years be added.
+ 
+Some parts of the text lack theoretical support. For instance, in Section 2.2. Operator Learning in Scientific Machine Learning, the statement that "operator learning has emerged in the field of scientific machine learning" and other related content lack references to support these viewpoints. It is recommended to cite relevant literature to back up these claims.
+ 
+There are several instances in this article where multiple different references are cited in a single sentence. For example, the content on line 305. It is recommended to modify this practice, such as providing detailed explanations of the different research dimensions each reference contributes to the argument, splitting the citations, or retaining only one reference to support that viewpoint.
+ 
+Contents of article
+The discussion on the advantages of operator learning is not deep enough.Although experiments show that DeepONet performs well in cross-scenario prediction, there is insufficient theoretical or mechanism analysis on "why operator learning is effective in this task". It is suggested to add qualitative or visual analysis (such as attention maps, feature importance, etc.) on how the branch-main structure captures the interaction between spatiotemporal dependencies and boundary conditions.
+ 
+Data Design and Rationality
+The dataset is entirely dependent on SUMO simulation, lacking validation with real traffic and logistics data. The simulation scenarios do not consider random factors such as sudden accidents, weather changes, and pedestrian interference in the real world, leading to doubts about the authenticity and generalization of the data. It is recommended to briefly explain in the introduction or methods section why the Solomon dataset and SUMO were chosen, the differences between it and real logistics data, and its impact on the conclusions.
+ 
+The selection of the potential dimension p lacks rigor. Only the performance of p = 64, 128, and 256 was compared, without indicating whether the optimal value was determined through grid search (such as p = 32, 64, 128, 256, 512), nor was the mechanism of the impact of p on the model performance analyzed. It is recommended to add this part of content.
+
+
+--- End of rev4.docx ---
+
+--- Start of rev5.docx ---
+Review Report Form
+Quality of English Language
+(x) The English could be improved to more clearly express the research.
+( ) The English is fine and does not require any improvement.
+
+Comments and Suggestions for Authors
+The paper builds a simulated logistics–traffic dataset and shows that a Deep Operator Network with a branch–trunk architecture can better predict minute-level link speeds (and transfer across scenarios) than several standard baselines on SUMO-based data driven by Solomon VRP instances. The main contribution is to connect logistics demand and traffic operator learning via this branch–trunk factorization and a unified data pipeline
+However, 
+- The authors should clarify more clearly, in the abstract and introduction, what is truly novel versus prior work: is the main contribution the synthetic dataset, the specific DeepONet architecture, or the logistics–traffic linkage? Right now, all three are claimed, and this can feel a bit overstated for a single paper.​
+- I suggest to the authors to better explain the practical relevance of the simulated 5 km subnetwork and six scenarios: for example, what real-world setting this scale corresponds to, and how conclusions might transfer (or not) to real data and larger networks.​
+- The authors should improve the description of the baseline models and their tuning to reassure readers that the comparison is fair (e.g., justify hyperparameters, show sensitivity, and explain why MLP, LSTM, TCN underperform in R² while having relatively low MAE/RMSE).​
+- I suggest to the authors to add more intuition and simple explanations around operator learning and the branch–trunk factorization, using fewer equations and more verbal explanations or small examples so that transportation/logistics readers without an ML theory background can follow.​
+- The authors should better motivate why minute-level one-step-ahead prediction is chosen (1-minute horizon, single-step), and briefly discuss how the method would behave for multi-step or longer-horizon forecasts that practitioners often need.​
+- I suggest to the authors to make the data-generation pipeline easier to reuse: for instance, clearly separate what is specific to this network and Solomon instances from what is generic, and provide a short “how to reproduce / adapt this to your city” subsection referencing the public code.​
+- The authors should strengthen the discussion of limitations around simulation: for example, calibration of SUMO, how realistic the congestion patterns are, and how noise, missing data, and sensor irregularities (which are acknowledged as challenges) could change the results on real data.​
+- I suggest to the authors to refine the evaluation section: in addition to global MAE/RMSE/R², show performance by speed regime or congestion level, since the motivation is to handle distribution shifts and congestion transitions; this would better support the claims about robustness and interpretability.​
+- The authors should revise the writing for clarity and flow: there are several long sentences, some typos (e.g., “Oerator learning”), and dense paragraphs that could be split; a careful language edit would make the paper much more readable.​
+- I suggest to the authors to connect more explicitly to potential users: for example, add a short subsection or paragraph explaining how traffic engineers or logistics planners could plug this model into routing, signal control, or digital-twin systems, and what additional steps (calibration, uncertainty estimation) would be needed before deployment.​
+
+--- End of rev5.docx ---
+

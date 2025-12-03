@@ -1,0 +1,29 @@
+Using device: cuda
+Loading data/dataset_sumo_5km_lag12_nonzero.npz...
+Loading split from data/sumo_split_nonzero.json...
+Starting training...
+Epoch 001 | Loss: 0.3508 | Val Loss: 0.2711 | MAE: 2.82 | R2: 0.7293 *
+Epoch 002 | Loss: 0.2657 | Val Loss: 0.2466 | MAE: 2.72 | R2: 0.7538 *
+Epoch 003 | Loss: 0.2519 | Val Loss: 0.2420 | MAE: 2.68 | R2: 0.7584 *
+Epoch 004 | Loss: 0.2470 | Val Loss: 0.2383 | MAE: 2.65 | R2: 0.7621 *
+Epoch 005 | Loss: 0.2444 | Val Loss: 0.2374 | MAE: 2.63 | R2: 0.7630 *
+Epoch 006 | Loss: 0.2417 | Val Loss: 0.2307 | MAE: 2.61 | R2: 0.7697 *
+Epoch 009 | Loss: 0.2364 | Val Loss: 0.2287 | MAE: 2.59 | R2: 0.7717 *
+Epoch 010 | Loss: 0.2340 | Val Loss: 0.2297 | MAE: 2.63 | R2: 0.7707
+Epoch 011 | Loss: 0.2324 | Val Loss: 0.2274 | MAE: 2.59 | R2: 0.7729 *
+Epoch 012 | Loss: 0.2319 | Val Loss: 0.2272 | MAE: 2.56 | R2: 0.7732 *
+Epoch 014 | Loss: 0.2297 | Val Loss: 0.2268 | MAE: 2.58 | R2: 0.7736 *
+Epoch 015 | Loss: 0.2286 | Val Loss: 0.2247 | MAE: 2.56 | R2: 0.7757 *
+Epoch 017 | Loss: 0.2271 | Val Loss: 0.2234 | MAE: 2.58 | R2: 0.7770 *
+Epoch 020 | Loss: 0.2250 | Val Loss: 0.2264 | MAE: 2.56 | R2: 0.7740
+Epoch 025 | Loss: 0.2205 | Val Loss: 0.2246 | MAE: 2.56 | R2: 0.7758
+Epoch 026 | Loss: 0.2203 | Val Loss: 0.2222 | MAE: 2.53 | R2: 0.7781 *
+Epoch 030 | Loss: 0.2173 | Val Loss: 0.2220 | MAE: 2.53 | R2: 0.7784 *
+Epoch 031 | Loss: 0.2170 | Val Loss: 0.2198 | MAE: 2.52 | R2: 0.7805 *
+Epoch 034 | Loss: 0.2148 | Val Loss: 0.2192 | MAE: 2.52 | R2: 0.7811 *
+Epoch 035 | Loss: 0.2134 | Val Loss: 0.2194 | MAE: 2.51 | R2: 0.7810
+Epoch 040 | Loss: 0.2104 | Val Loss: 0.2205 | MAE: 2.51 | R2: 0.7799
+Epoch 041 | Loss: 0.2099 | Val Loss: 0.2179 | MAE: 2.50 | R2: 0.7824 *
+Epoch 045 | Loss: 0.2077 | Val Loss: 0.2170 | MAE: 2.48 | R2: 0.7834 *
+Epoch 050 | Loss: 0.2038 | Val Loss: 0.2197 | MAE: 2.49 | R2: 0.7806
+FINAL_RESULT_JSON:{"model": "Transformer", "params": 563969, "time_sec": 2146.31197309494, "test_mae": 2.4792590141296387, "test_rmse": 3.7881271839141846, "test_r2": 0.7848074436187744}

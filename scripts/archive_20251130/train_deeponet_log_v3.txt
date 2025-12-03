@@ -1,0 +1,28 @@
+Using device: cuda
+Loading data/dataset_sumo_5km_lag12_nonzero.npz...
+Loading split from data/sumo_split_nonzero.json...
+Starting training...
+Traceback (most recent call last):
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_deeponet_sumo_std.py", line 209, in <module>
+    main()
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_deeponet_sumo_std.py", line 134, in main
+    pred = model(x)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_deeponet_sumo_std.py", line 59, in forward
+    b_out = self.branch(branch_in)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\container.py", line 244, in forward
+    input = module(input)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: mat1 and mat2 shapes cannot be multiplied (1024x13 and 12x256)

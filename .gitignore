@@ -9,8 +9,8 @@ venv/
 .env/
 .DS_Store
 
-data/*.npz
-data/*/*.npz
+data/
+data-3951152/
 scenarios/*/edgedata.xml
 scenarios/*/tripinfo.xml
 scenarios/*/routes.rou.xml
@@ -18,3 +18,4 @@ net/*.osm.xml
 net/*.net.xml
 models/*.pt
 artifacts/
+data/*.zip

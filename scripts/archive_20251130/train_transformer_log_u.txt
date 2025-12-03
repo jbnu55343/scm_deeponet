@@ -1,0 +1,33 @@
+Using device: cuda
+Loading data/dataset_sumo_5km_lag12_nonzero.npz...
+Loading split from data/sumo_split_nonzero.json...
+Starting training...
+Epoch 001 | Loss: 0.3899 | Val Loss: 0.2626 | MAE: 2.83 | R2: 0.7379 *
+Epoch 002 | Loss: 0.2674 | Val Loss: 0.2528 | MAE: 2.74 | R2: 0.7477 *
+Epoch 003 | Loss: 0.2599 | Val Loss: 0.2471 | MAE: 2.73 | R2: 0.7533 *
+Epoch 004 | Loss: 0.2558 | Val Loss: 0.2467 | MAE: 2.72 | R2: 0.7537 *
+Epoch 005 | Loss: 0.2522 | Val Loss: 0.2469 | MAE: 2.70 | R2: 0.7534
+Epoch 006 | Loss: 0.2498 | Val Loss: 0.2445 | MAE: 2.71 | R2: 0.7559 *
+Epoch 009 | Loss: 0.2451 | Val Loss: 0.2413 | MAE: 2.69 | R2: 0.7591 *
+Epoch 010 | Loss: 0.2447 | Val Loss: 0.2387 | MAE: 2.65 | R2: 0.7617 *
+Epoch 012 | Loss: 0.2424 | Val Loss: 0.2378 | MAE: 2.67 | R2: 0.7625 *
+Epoch 015 | Loss: 0.2396 | Val Loss: 0.2362 | MAE: 2.66 | R2: 0.7641 *
+Epoch 020 | Loss: 0.2356 | Val Loss: 0.2354 | MAE: 2.61 | R2: 0.7649 *
+Epoch 021 | Loss: 0.2351 | Val Loss: 0.2344 | MAE: 2.62 | R2: 0.7660 *
+Epoch 023 | Loss: 0.2339 | Val Loss: 0.2318 | MAE: 2.62 | R2: 0.7686 *
+Epoch 025 | Loss: 0.2320 | Val Loss: 0.2377 | MAE: 2.65 | R2: 0.7627
+Epoch 030 | Loss: 0.2282 | Val Loss: 0.2343 | MAE: 2.59 | R2: 0.7661
+Epoch 035 | Loss: 0.2251 | Val Loss: 0.2294 | MAE: 2.58 | R2: 0.7710 *
+Epoch 040 | Loss: 0.2223 | Val Loss: 0.2316 | MAE: 2.59 | R2: 0.7687
+Epoch 045 | Loss: 0.2193 | Val Loss: 0.2308 | MAE: 2.57 | R2: 0.7695
+Epoch 048 | Loss: 0.2169 | Val Loss: 0.2282 | MAE: 2.56 | R2: 0.7722 *
+Epoch 050 | Loss: 0.2158 | Val Loss: 0.2334 | MAE: 2.59 | R2: 0.7669
+Traceback (most recent call last):
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_transformer_sumo_std.py", line 210, in <module>
+    }
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_transformer_sumo_std.py", line 178, in main
+    
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 2624, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for TransformerModel:
+	size mismatch for pos_encoder: copying a param with shape torch.Size([1, 13, 64]) from checkpoint, the shape in current model is torch.Size([1, 12, 64]).

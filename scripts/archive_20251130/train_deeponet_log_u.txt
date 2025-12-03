@@ -1,0 +1,38 @@
+Using device: cuda
+Loading data/dataset_sumo_5km_lag12_nonzero.npz...
+Loading split from data/sumo_split_nonzero.json...
+Starting training...
+Epoch 001 | Loss: 0.3177 | Val Loss: 0.2747 | MAE: 2.98 | R2: 0.7258 *
+Epoch 002 | Loss: 0.2802 | Val Loss: 0.2607 | MAE: 2.86 | R2: 0.7397 *
+Epoch 003 | Loss: 0.2703 | Val Loss: 0.2520 | MAE: 2.80 | R2: 0.7484 *
+Epoch 004 | Loss: 0.2638 | Val Loss: 0.2503 | MAE: 2.79 | R2: 0.7501 *
+Epoch 005 | Loss: 0.2587 | Val Loss: 0.2464 | MAE: 2.75 | R2: 0.7540 *
+Epoch 006 | Loss: 0.2551 | Val Loss: 0.2456 | MAE: 2.76 | R2: 0.7547 *
+Epoch 007 | Loss: 0.2525 | Val Loss: 0.2432 | MAE: 2.73 | R2: 0.7572 *
+Epoch 008 | Loss: 0.2495 | Val Loss: 0.2406 | MAE: 2.72 | R2: 0.7598 *
+Epoch 009 | Loss: 0.2470 | Val Loss: 0.2399 | MAE: 2.71 | R2: 0.7605 *
+Epoch 010 | Loss: 0.2447 | Val Loss: 0.2384 | MAE: 2.70 | R2: 0.7620 *
+Epoch 012 | Loss: 0.2406 | Val Loss: 0.2353 | MAE: 2.67 | R2: 0.7651 *
+Epoch 013 | Loss: 0.2388 | Val Loss: 0.2348 | MAE: 2.68 | R2: 0.7656 *
+Epoch 014 | Loss: 0.2372 | Val Loss: 0.2346 | MAE: 2.67 | R2: 0.7658 *
+Epoch 015 | Loss: 0.2354 | Val Loss: 0.2342 | MAE: 2.68 | R2: 0.7662 *
+Epoch 016 | Loss: 0.2336 | Val Loss: 0.2341 | MAE: 2.69 | R2: 0.7662 *
+Epoch 017 | Loss: 0.2318 | Val Loss: 0.2335 | MAE: 2.67 | R2: 0.7668 *
+Epoch 018 | Loss: 0.2299 | Val Loss: 0.2332 | MAE: 2.69 | R2: 0.7672 *
+Epoch 019 | Loss: 0.2291 | Val Loss: 0.2314 | MAE: 2.66 | R2: 0.7690 *
+Epoch 020 | Loss: 0.2272 | Val Loss: 0.2317 | MAE: 2.67 | R2: 0.7687
+Epoch 021 | Loss: 0.2252 | Val Loss: 0.2293 | MAE: 2.64 | R2: 0.7711 *
+Epoch 022 | Loss: 0.2238 | Val Loss: 0.2285 | MAE: 2.65 | R2: 0.7719 *
+Epoch 025 | Loss: 0.2200 | Val Loss: 0.2281 | MAE: 2.65 | R2: 0.7723 *
+Epoch 026 | Loss: 0.2189 | Val Loss: 0.2261 | MAE: 2.62 | R2: 0.7743 *
+Epoch 030 | Loss: 0.2141 | Val Loss: 0.2265 | MAE: 2.63 | R2: 0.7739
+Epoch 032 | Loss: 0.2126 | Val Loss: 0.2256 | MAE: 2.63 | R2: 0.7748 *
+Epoch 034 | Loss: 0.2101 | Val Loss: 0.2250 | MAE: 2.62 | R2: 0.7754 *
+Epoch 035 | Loss: 0.2094 | Val Loss: 0.2243 | MAE: 2.63 | R2: 0.7761 *
+Epoch 037 | Loss: 0.2078 | Val Loss: 0.2240 | MAE: 2.62 | R2: 0.7764 *
+Epoch 040 | Loss: 0.2052 | Val Loss: 0.2245 | MAE: 2.62 | R2: 0.7759
+Epoch 042 | Loss: 0.2035 | Val Loss: 0.2225 | MAE: 2.60 | R2: 0.7779 *
+Epoch 045 | Loss: 0.2018 | Val Loss: 0.2230 | MAE: 2.60 | R2: 0.7774
+Epoch 048 | Loss: 0.1992 | Val Loss: 0.2219 | MAE: 2.60 | R2: 0.7784 *
+Epoch 050 | Loss: 0.1985 | Val Loss: 0.2217 | MAE: 2.61 | R2: 0.7787 *
+FINAL_RESULT_JSON:{"model": "DeepONet", "params": 203521, "time_sec": 272.1970372200012, "test_mae": 2.6103804111480713, "test_rmse": 3.8450827598571777, "test_r2": 0.7782878875732422}

@@ -1,0 +1,15 @@
+[LOAD] X=(34259, 2484) Y=(34259,) features=[2484 features]
+[SPLIT] Using pre-defined split from NPZ file
+[STATS] x_mean[:3]= [57.05817635 60.93144836 61.17673378] x_std[:3]= [20.0661397  14.98088011 17.47825998] y_mean= 57.065129189576666 y_std= 20.0600813307081
+[METADATA] Found original std: 1.00 (for restoring real units)
+[E01] train_mse=0.3213  val: MAE=9.298 (Real=9.3) RMSE=14.089 (Real=14.1) R2=0.7979  (58.6s)
+[E02] train_mse=0.1626  val: MAE=8.675 (Real=8.7) RMSE=13.336 (Real=13.3) R2=0.8189  (34.8s)
+[E03] train_mse=0.1443  val: MAE=8.846 (Real=8.8) RMSE=14.444 (Real=14.4) R2=0.7875  (28.6s)
+[E04] train_mse=0.1255  val: MAE=10.941 (Real=10.9) RMSE=17.718 (Real=17.7) R2=0.6803  (26.6s)
+[E05] train_mse=0.1168  val: MAE=11.418 (Real=11.4) RMSE=18.726 (Real=18.7) R2=0.6429  (26.5s)
+[E06] train_mse=0.1125  val: MAE=8.439 (Real=8.4) RMSE=13.801 (Real=13.8) R2=0.8060  (26.7s)
+[E07] train_mse=0.1052  val: MAE=8.418 (Real=8.4) RMSE=13.838 (Real=13.8) R2=0.8050  (27.0s)
+[EARLY-STOP]
+[TEST] MAE=4.641 (Real=4.6) RMSE=8.530 (Real=8.5) R2=0.8508
+FINAL_RESULT_JSON:{"model": "MLP", "params": 702209, "time_sec": 228.8724672794342, "test_mae": 4.640879154205322, "test_rmse": 8.529807391479727, "test_r2": 0.8507907390594482}
+[SAVE] models/mlp_metr_la.pth

@@ -1,52 +1,142 @@
-# Shanghai 5km: OSM → SUMO → DeepONet
+# Operator Learning for Macroscopic Traffic Speed Forecasting
 
-## 目录结构
+This repository contains the official implementation of the paper **"Operator Learning with Branch–Trunk Factorization for Macroscopic Short-Term Speed Forecasting"**.
+
+The framework utilizes **Deep Operator Networks (DeepONet)** to bridge the gap between logistics demand (boundary conditions) and traffic state dynamics.
+
+---
+
+## 🛠️ Environment Setup
+
+The code is implemented in **Python 3.10** using **PyTorch 2.0**.
+
+### Installation
 ```bash
-net/ # 路网与投影结果
-data/ # 输入/输出数据（npz等不进repo或用LFS）
-scenarios/ # S001..S006（routes、run.sumocfg、additional等）
-scripts/ # 工具脚本
-configs/ # 参数yaml等
-models/ # 训练产物（本地保留）
+# Create a virtual environment (optional)
+conda create -n traffic_op python=3.10
+conda activate traffic_op
+
+# Install dependencies
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install torch-geometric
+pip install numpy pandas scikit-learn matplotlib
 ```
 
+---
 
-## 快速开始
+## 📂 Data Preparation
+
+### 1. SUMO Simulation Data (Modules 1 & 2)
+The simulation data is generated using SUMO and processed into `.npz` files.
+
+**Step 1: Split Data**
+Create standard train/test splits from the raw simulation logs.
 ```bash
-# 1) build_net_from_osm 生成路网（示例）
-python scripts\build_net_from_osm 
-netconvert --osm-files net\shanghai_5km.osm.xml --proj "utm,51N" --tls.guess true --junctions.join true --keep-edges.by-vclass passenger --remove-edges.islands -o net\shanghai_5km.net.xml
-
-# 2) 吸附 C101
-python scripts\resnap_customers_v2.py --net net\shanghai_5km.net.xml --in_csv data\solomon\C101.csv --out_csv data\customers_snapped_5km.csv --map fit --fit_margin 150 --max_radius 2000 --grow 1.6
-
-# 3) 生成 trips
-python scripts\gen_trips.py
-
-# 4) 路由
-duarouter -n net\shanghai_5km.net.xml --route-files scenarios\S001\trips.trips.xml --ignore-errors --repair -o scenarios\S001\routes.rou.xml
-
-# 5) 仿真（或用 sumo-gui）
-sumo -c scenarios\S001\run.sumocfg
-
-# 6) 制作数据集 & 训练
-python scripts\make_dataset.py --scenarios_dir scenarios --out_npz data\dataset_traffic_5km.npz
-python scripts\train_deeponet.py --npz data\dataset_traffic_5km.npz --epochs 20 --bs 4096
+python scripts/create_standard_split.py
 ```
 
-## 实验流程图
-```mermaid
-flowchart TD
-  OSM --> NET(netconvert) --> SNAP(resnap) --> TRIPS(gen_trips)
-  TRIPS --> ROUTE(duarouter) --> SIM(sumo/edgedata) --> DATA(npz)
-  DATA --> TRAIN(DeepONet)
+**Step 2: Filter Data**
+Apply filtering to remove stationary periods and outliers.
+```bash
+python scripts/filter_sumo_data.py
+```
+*Output:* `data/dataset_sumo_5km_lag12_filtered.npz`
+
+### 2. METR-LA Real-World Data (Module 3)
+Preprocess the METR-LA benchmark dataset for Operator Learning (Branch=Spatial, Trunk=Temporal).
+
+```bash
+python scripts/preprocess_metr_la.py
+```
+*Output:* `data/metr_la_lag12_temporal.npz`, `data/metr_la_lag12_spatial.npz`
+
+---
+
+## 🚀 Experiments
+
+### Module 1: SUMO Baseline (Temporal Only)
+Evaluate models on the linear simulation topology using only temporal features.
+
+```bash
+# MLP Baseline
+python scripts/train_mlp_sumo_std.py --npz data/dataset_sumo_5km_lag12_filtered.npz
+
+# DeepONet (Temporal)
+python scripts/train_deeponet_sumo_std.py --npz data/dataset_sumo_5km_lag12_filtered.npz
+
+# Transformer
+python scripts/train_transformer_sumo_std.py --npz data/dataset_sumo_5km_lag12_filtered.npz
 ```
 
+### Module 2: SUMO Spatial (With Upstream/Downstream)
+Evaluate the impact of adding spatial boundary conditions ($v_{up}, v_{down}, k_{up}, k_{down}$).
 
+```bash
+# DeepONet (Spatial)
+python scripts/train_deeponet_sumo_std.py --npz data/dataset_sumo_5km_lag12_filtered_with_spatial.npz
 
-## 解决无法识别车辆类型的问题
+# GNN (Local Graph)
+python scripts/train_gnn_sumo_std.py --npz data/dataset_sumo_5km_lag12_filtered_with_spatial.npz
+```
 
-A) 新建一个通用的类型文件，并在运行时附加（推荐）
+### Module 3: Real-World Validation (METR-LA)
+Validate on the complex METR-LA graph network (207 sensors).
+
+```bash
+# DeepONet (SOTA)
+python scripts/train_deeponet_metr_la.py --epochs 100
+
+# GNN Baseline (GraphSAGE/GCN)
+python scripts/train_gnn_metr_la.py --epochs 100
+
+# Transformer Baseline
+python scripts/train_transformer_metr_la.py --epochs 100
+
+# MLP Baseline
+python scripts/train_mlp_metr_la.py --epochs 100
+```
+
+---
+
+## 📊 Results & Logs
+
+*   **Training Logs:** Saved in `results/` directory with timestamps.
+*   **Summary:** Run the collection script to aggregate results into a markdown table.
+
+```bash
+python scripts/collect_sumo_results.py
+```
+
+### Key Results (from Paper)
+
+| Dataset | Model | R² Score | MAE (km/h) |
+| :--- | :--- | :--- | :--- |
+| **SUMO (Sim)** | MLP | **0.7800** | 2.60 |
+| | DeepONet | 0.7685 | 2.80 |
+| **METR-LA (Real)** | **DeepONet** | **0.9172** | **2.55** |
+| | Transformer | 0.9137 | 2.74 |
+| | GNN | 0.8952 | 4.56 |
+| | MLP | 0.8508 | 4.64 |
+
+---
+
+## 🗂️ Code Structure
+
+```
+.
+├── data/                   # Dataset files (.npz, .csv)
+├── docs/                   # Documentation & Response to Reviewers
+├── results/                # Saved models and logs
+├── scripts/
+│   ├── train_*.py          # Training scripts for specific models/datasets
+│   ├── preprocess_*.py     # Data preprocessing
+│   ├── std_utils.py        # Utility functions (Logger, EarlyStopping)
+│   └── archive_20251130/   # Archived/Legacy code
+└── README.md               # This file
+```
+
+## 📧 Contact
+For any questions, please open an issue or contact the authors.
 
 在项目里建一个公共的类型文件（放在 scenarios 目录下，所有场景共用）：
 

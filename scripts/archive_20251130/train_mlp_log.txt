@@ -1,0 +1,48 @@
+Using device: cuda
+Loading data/dataset_sumo_5km_lag12_nonzero.npz...
+Loading split from data/sumo_split_nonzero.json...
+Train samples: 419479
+Input dim: 22
+Starting training...
+Epoch 001 | Loss: 0.3362 | Val Loss: 0.2752 | MAE: 2.96 | R2: 0.7253 *
+Epoch 002 | Loss: 0.2868 | Val Loss: 0.2672 | MAE: 2.95 | R2: 0.7333 *
+Epoch 003 | Loss: 0.2770 | Val Loss: 0.2598 | MAE: 2.83 | R2: 0.7407 *
+Epoch 004 | Loss: 0.2700 | Val Loss: 0.2553 | MAE: 2.83 | R2: 0.7452 *
+Epoch 005 | Loss: 0.2656 | Val Loss: 0.2525 | MAE: 2.82 | R2: 0.7479 *
+Epoch 006 | Loss: 0.2621 | Val Loss: 0.2496 | MAE: 2.76 | R2: 0.7508 *
+Epoch 007 | Loss: 0.2587 | Val Loss: 0.2479 | MAE: 2.74 | R2: 0.7525 *
+Epoch 009 | Loss: 0.2528 | Val Loss: 0.2458 | MAE: 2.76 | R2: 0.7546 *
+Epoch 010 | Loss: 0.2510 | Val Loss: 0.2440 | MAE: 2.73 | R2: 0.7564 *
+Epoch 011 | Loss: 0.2485 | Val Loss: 0.2438 | MAE: 2.75 | R2: 0.7566 *
+Epoch 012 | Loss: 0.2463 | Val Loss: 0.2407 | MAE: 2.69 | R2: 0.7597 *
+Epoch 014 | Loss: 0.2426 | Val Loss: 0.2396 | MAE: 2.70 | R2: 0.7607 *
+Epoch 015 | Loss: 0.2410 | Val Loss: 0.2396 | MAE: 2.71 | R2: 0.7608 *
+Epoch 017 | Loss: 0.2379 | Val Loss: 0.2379 | MAE: 2.70 | R2: 0.7625 *
+Epoch 019 | Loss: 0.2354 | Val Loss: 0.2372 | MAE: 2.71 | R2: 0.7631 *
+Epoch 020 | Loss: 0.2341 | Val Loss: 0.2371 | MAE: 2.69 | R2: 0.7632 *
+Epoch 021 | Loss: 0.2329 | Val Loss: 0.2359 | MAE: 2.67 | R2: 0.7645 *
+Epoch 023 | Loss: 0.2304 | Val Loss: 0.2357 | MAE: 2.69 | R2: 0.7646 *
+Epoch 024 | Loss: 0.2296 | Val Loss: 0.2354 | MAE: 2.65 | R2: 0.7650 *
+Epoch 025 | Loss: 0.2286 | Val Loss: 0.2348 | MAE: 2.69 | R2: 0.7655 *
+Epoch 026 | Loss: 0.2273 | Val Loss: 0.2346 | MAE: 2.68 | R2: 0.7658 *
+Epoch 027 | Loss: 0.2264 | Val Loss: 0.2338 | MAE: 2.66 | R2: 0.7665 *
+Epoch 028 | Loss: 0.2259 | Val Loss: 0.2323 | MAE: 2.65 | R2: 0.7680 *
+Epoch 030 | Loss: 0.2232 | Val Loss: 0.2332 | MAE: 2.68 | R2: 0.7672
+Epoch 031 | Loss: 0.2227 | Val Loss: 0.2316 | MAE: 2.65 | R2: 0.7688 *
+Epoch 035 | Loss: 0.2199 | Val Loss: 0.2321 | MAE: 2.67 | R2: 0.7682
+Epoch 036 | Loss: 0.2190 | Val Loss: 0.2305 | MAE: 2.63 | R2: 0.7699 *
+Epoch 039 | Loss: 0.2170 | Val Loss: 0.2302 | MAE: 2.62 | R2: 0.7702 *
+Epoch 040 | Loss: 0.2164 | Val Loss: 0.2319 | MAE: 2.66 | R2: 0.7684
+Epoch 042 | Loss: 0.2147 | Val Loss: 0.2297 | MAE: 2.62 | R2: 0.7706 *
+Epoch 045 | Loss: 0.2138 | Val Loss: 0.2296 | MAE: 2.66 | R2: 0.7707 *
+Epoch 048 | Loss: 0.2119 | Val Loss: 0.2291 | MAE: 2.62 | R2: 0.7713 *
+Epoch 049 | Loss: 0.2116 | Val Loss: 0.2283 | MAE: 2.63 | R2: 0.7720 *
+Epoch 050 | Loss: 0.2109 | Val Loss: 0.2291 | MAE: 2.64 | R2: 0.7712
+Traceback (most recent call last):
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_mlp_sumo_std.py", line 195, in <module>
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_mlp_sumo_std.py", line 163, in main
+    preds = []
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 2624, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for MLP:
+	size mismatch for net.0.weight: copying a param with shape torch.Size([256, 23]) from checkpoint, the shape in current model is torch.Size([256, 22]).

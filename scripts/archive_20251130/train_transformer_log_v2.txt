@@ -1,0 +1,16 @@
+Using device: cuda
+Loading data/dataset_sumo_5km_lag12_nonzero.npz...
+Loading split from data/sumo_split_nonzero.json...
+Starting training...
+Traceback (most recent call last):
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_transformer_sumo_std.py", line 210, in <module>
+    main()
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_transformer_sumo_std.py", line 135, in main
+    pred = model(x)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "D:\DL\envs\pytorch_gpu\lib\site-packages\torch\nn\modules\module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\pro_and_data\SCM_DeepONet_code\scripts\train_transformer_sumo_std.py", line 51, in forward
+    src = torch.cat([lags_seq, context_seq], dim=2) # (B, 12, 11)
+RuntimeError: Sizes of tensors must match except in dimension 2. Expected size 13 but got size 12 for tensor number 1 in the list.

@@ -1,0 +1,22 @@
+Using device: cuda
+Loading data/dataset_sumo_5km_lag12_filtered_with_spatial.npz...
+Loading split from data/sumo_split_standard.json...
+Train samples: 838568
+Input dim: 22
+Starting training...
+Epoch 001 | Loss: 0.3687 | Val Loss: 0.2983 | MAE: 2.95 | R2: 0.6995 *
+Epoch 002 | Loss: 0.3264 | Val Loss: 0.2964 | MAE: 2.93 | R2: 0.7013 *
+Epoch 003 | Loss: 0.3175 | Val Loss: 0.2874 | MAE: 2.84 | R2: 0.7105 *
+Epoch 004 | Loss: 0.3117 | Val Loss: 0.2814 | MAE: 2.80 | R2: 0.7164 *
+Epoch 005 | Loss: 0.3074 | Val Loss: 0.2789 | MAE: 2.78 | R2: 0.7190 *
+Epoch 007 | Loss: 0.3014 | Val Loss: 0.2750 | MAE: 2.75 | R2: 0.7229 *
+Epoch 008 | Loss: 0.2991 | Val Loss: 0.2725 | MAE: 2.73 | R2: 0.7254 *
+Epoch 009 | Loss: 0.2976 | Val Loss: 0.2718 | MAE: 2.72 | R2: 0.7261 *
+Epoch 010 | Loss: 0.2954 | Val Loss: 0.2726 | MAE: 2.74 | R2: 0.7253
+Epoch 011 | Loss: 0.2941 | Val Loss: 0.2700 | MAE: 2.71 | R2: 0.7279 *
+Epoch 013 | Loss: 0.2919 | Val Loss: 0.2694 | MAE: 2.71 | R2: 0.7286 *
+Epoch 015 | Loss: 0.2897 | Val Loss: 0.2693 | MAE: 2.71 | R2: 0.7287 *
+Epoch 016 | Loss: 0.2892 | Val Loss: 0.2680 | MAE: 2.69 | R2: 0.7300 *
+Epoch 017 | Loss: 0.2881 | Val Loss: 0.2652 | MAE: 2.69 | R2: 0.7328 *
+Epoch 020 | Loss: 0.2859 | Val Loss: 0.2666 | MAE: 2.69 | R2: 0.7314
+Epoch 022 | Loss: 0.2844 | Val Loss: 0.2652 | MAE: 2.68 | R2: 0.7328 *
