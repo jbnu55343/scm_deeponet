@@ -1,59 +1,111 @@
-# Response to Reviewers
+Response to Reviewer 5
 
-We thank the reviewers for their insightful comments and constructive suggestions. We have carefully revised the manuscript to address all points raised. Below is a point-by-point response to the reviews.
+We sincerely thank the reviewer for the comprehensive and constructive feedback. We have carefully addressed each point to improve the clarity, rigor, and practical relevance of our manuscript.
 
-**General Note on Data Processing and Performance Metrics:**
-We would like to clarify a change in the reported performance metrics compared to the previous submission. In the initial version, the simulation dataset included zero-values (representing empty road segments), which artificially inflated the prediction accuracy as these trivial cases were easy to predict. In this revision, we have rigorously cleaned the dataset by removing these zero-values to focus on non-trivial traffic dynamics. Consequently, the overall prediction task has become more challenging, resulting in slightly lower absolute performance metrics compared to the first draft. However, these new results more accurately reflect the model's capability to handle complex, realistic traffic flow regimes.
+Comment 1: The authors should clarify more clearly, in the abstract and introduction, what is truly novel versus prior work: is the main contribution the synthetic dataset, the specific DeepONet architecture, or the logistics–traffic linkage? Right now, all three are claimed, and this can feel a bit overstated for a single paper.
 
----
+Response:
+We have refined the Abstract and Introduction to clarify our primary contribution.
+1.  Primary Contribution: The core novelty is the **application of operator learning (DeepONet)** to bridge the gap between logistics demand and traffic state forecasting, enabling robust generalization under distribution shifts.
+2.  Supporting Contributions: The synthetic dataset and the specific architecture are presented as *enablers* for this primary goal, rather than standalone novelties.
+3.  Clarification: We rewrote the contribution statement in the Introduction to explicitly hierarchy these points.
 
-## Reviewer 5
+Changes:
+Abstract (Page 1, Lines 168-175): Rewritten to focus on the operator learning framework.
+Introduction (Page 3, Lines 240-250): Clarified the hierarchy of contributions.
 
-**Comment 1:** The authors should clarify more clearly what is truly novel versus prior work: is the main contribution the synthetic dataset, the specific DeepONet architecture, or the logistics–traffic linkage?
+Comment 2: I suggest to the authors to better explain the practical relevance of the simulated 5 km subnetwork and six scenarios: for example, what real-world setting this scale corresponds to, and how conclusions might transfer (or not) to real data and larger networks.
 
-**Response:** We have refined the Introduction to clarify that the primary contribution is the **framework** (the application of Operator Learning to link logistics demand and traffic states). The synthetic dataset is a necessary tool to enable this study (as such linked data is rare), and the architecture is the method. The novelty lies in **formulating the logistics-traffic coupling as an operator learning problem**, which allows for robust cross-scenario generalization.
+Response:
+We have added a justification for the 5km scale in Section 3.1.
+1.  Relevance: The 5km scale corresponds to a typical "last-mile" delivery district or a specific traffic corridor managed by a local controller.
+2.  Transferability: We argue that the *physics* of traffic flow (wave propagation) captured at this scale is fundamental and transferable.
+3.  Validation: We added the METR-LA experiment (Section 5.4) to empirically demonstrate that the conclusions drawn from the 5km simulation indeed transfer to a larger, real-world network (207 sensors).
 
-**Changes:** Revised the "Contributions" section to emphasize the framework and the problem formulation. (Introduction, Lines 190-205)
+Changes:
+Section 3.1 (Page 5, Lines 370-380): Added justification for the simulation scale.
+Section 5.4 (Page 12, Lines 629-645): Added Real-World Validation.
 
----
+Comment 3: The authors should improve the description of the baseline models and their tuning to reassure readers that the comparison is fair (e.g., justify hyperparameters, show sensitivity, and explain why MLP, LSTM, TCN underperform in R² while having relatively low MAE/RMSE).
 
-**Comment 2:** I suggest to the authors to better explain the practical relevance of the simulated 5 km subnetwork and six scenarios.
+Response:
+We have strengthened the baseline description and analysis.
+1.  Tuning: We added Section 4.5 detailing the hyperparameter search space for all models (including baselines) to ensure fair comparison.
+2.  Metric Discrepancy: We added a discussion in Section 5.1 explaining that $R^2$ is more sensitive to large errors in high-variance regimes (congestion), whereas MAE averages out these errors. The lower $R^2$ of baselines despite competitive MAE indicates they fail specifically in the critical, difficult-to-predict congestion regimes, which is confirmed by the error distribution plots (Figure 3).
 
-**Response:** We explained in Section 3 that the 5km scale corresponds to district-level or corridor-level traffic control (e.g., signal coordination zones). To further demonstrate relevance, we added the **METR-LA** experiment (Module 3), which covers a much larger, city-scale network, proving that the method scales beyond the 5km simulation.
+Changes:
+Section 4.5 (Page 8, Lines 503-505): Added hyperparameter tuning details.
+Section 5.1 (Page 10, Lines 570-580): Discussed the discrepancy between $R^2$ and MAE.
 
-**Changes:** Added Module 3 and clarified the relevance of the 5km scale in Section 3. (Section 3.1, Lines 330-335; Section 5.4, Lines 615-645)
+Comment 4: I suggest to the authors to add more intuition and simple explanations around operator learning and the branch–trunk factorization, using fewer equations and more verbal explanations or small examples so that transportation/logistics readers without an ML theory background can follow.
 
----
+Response:
+We have added a "Physical Interpretation" subsection (Section 2.3) that uses plain language and analogies.
+1.  Analogy: We explain the Branch network as learning the "system inertia" (like mass) and the Trunk network as learning the "boundary forces" (like gravity/friction).
+2.  Mechanism: We explain the dot product as a "weighted sum of modes," where the Trunk provides the possible traffic states (modes) and the Branch decides which ones are active based on history.
 
-**Comment 3:** The authors should improve the description of the baseline models and their tuning... and explain why MLP, LSTM, TCN underperform in R² while having relatively low MAE/RMSE.
+Changes:
+Section 2.3 (Page 4, Lines 273-290): Added intuitive physical interpretation.
 
-**Response:** We have added a detailed "Implementation Details" section (or Appendix) describing the hyperparameters. Regarding the metrics: $R^2$ is highly sensitive to the variance of the target. In traffic data, "free-flow" periods have low variance (speed is constant), so small errors can lead to poor $R^2$ if the model predicts the mean. MAE is more robust to this. However, our new results in Module 3 show that DeepONet outperforms baselines in $R^2$ as well, confirming its superiority.
+Comment 5: The authors should better motivate why minute-level one-step-ahead prediction is chosen (1-minute horizon, single-step), and briefly discuss how the method would behave for multi-step or longer-horizon forecasts that practitioners often need.
 
-**Changes:** Added details on baselines and metrics interpretation. (Section 4.4, Lines 450-465; Section 4.6, Lines 525-530)
+Response:
+We have justified the 1-minute horizon in Section 3.1.
+1.  Motivation: Minute-level forecasting is critical for real-time signal control and dynamic routing in "just-in-time" logistics.
+2.  Multi-step: We added a discussion in the Conclusion (Section 6) noting that DeepONet can be naturally extended to multi-step forecasting by querying the Trunk network at future time coordinates ($t+\Delta t$), a unique advantage of the continuous operator approach compared to autoregressive iteration.
 
----
+Changes:
+Section 3.1 (Page 5, Lines 350-360): Justified minute-level horizon.
+Section 6 (Page 14, Lines 745-750): Discussed extension to multi-step forecasting.
 
-**Comment 4:** I suggest to the authors to refine the evaluation section: in addition to global MAE/RMSE/R², show performance by speed regime or congestion level.
+Comment 6: I suggest to the authors to make the data-generation pipeline easier to reuse: for instance, clearly separate what is specific to this network and Solomon instances from what is generic, and provide a short “how to reproduce / adapt this to your city” subsection referencing the public code.
 
-**Response:** We have added **Figure 2 (b)**, which explicitly shows the "Boxplot of absolute errors by traffic regime (Congested vs. Free-flow)". This analysis reveals that baselines like MLP suffer from outliers in free-flow regimes (likely due to noise), while DeepONet remains robust.
+Response:
+We have improved the reproducibility description.
+1.  Code Availability: We referenced the public repository in the "Data Availability Statement".
+2.  Pipeline Description: We revised Section 3.2 to clearly distinguish between the generic pipeline (SUMO configuration, demand mapping) and the specific instance data.
 
-**Changes:** Added regime-based error analysis in Section \ref{sec:module2}. (Section 5.3, Figure 4, Lines 605-610)
+Changes:
+Section 3.2 (Page 6, Lines 390-400): Clarified the generic vs. specific aspects of the pipeline.
+Data Availability Statement (Page 15): Added link to repository.
 
----
+Comment 7: The authors should strengthen the discussion of limitations around simulation: for example, calibration of SUMO, how realistic the congestion patterns are, and how noise, missing data, and sensor irregularities (which are acknowledged as challenges) could change the results on real data.
 
-**Comment 5:** The authors should revise the writing for clarity and flow... fix typos (e.g., “Oerator learning”).
+Response:
+We have expanded the Limitations section and added robustness tests.
+1.  Realism: We acknowledge the "Sim2Real" gap in Section 6.
+2.  Robustness: We added Figure 5 (Perturbation Analysis) to explicitly test the model's resilience to noise in boundary conditions, simulating sensor irregularities.
+3.  Validation: The METR-LA experiment (Section 5.4) serves as the ultimate test of these limitations, showing the model holds up under real-world noise.
 
-**Response:** We have performed a thorough proofreading of the manuscript. We corrected the specific typo "Oerator learning" to "Operator learning" and addressed other identified errors (e.g., "entred", author name misspellings). We also improved sentence flow and standardized formatting throughout the text.
+Changes:
+Section 6 (Page 14, Lines 738-754): Expanded Limitations discussion.
+Figure 5 (Page 13): Added perturbation analysis.
 
-**Changes:** Corrected "Oerator learning" to "Operator learning", fixed author name typos, and polished the text for clarity and consistency. (Throughout the manuscript)
+Comment 8: I suggest to the authors to refine the evaluation section: in addition to global MAE/RMSE/R², show performance by speed regime or congestion level, since the motivation is to handle distribution shifts and congestion transitions; this would better support the claims about robustness and interpretability.
 
----
+Response:
+We have added regime-specific analysis.
+1.  Error vs. Density: We added Figure 3(b) which plots prediction error against traffic density. This clearly shows that while baselines (MLP) degrade quadratically as density increases (congestion), DeepONet maintains stable performance.
+2.  Parity Plots: We added Figure 4 (Parity Plots) for the real-world data, visually separating free-flow and congestion performance.
 
-**Comment 6:** I suggest to the authors to connect more explicitly to potential users: for example, add a short subsection or paragraph explaining how traffic engineers or logistics planners could plug this model into routing...
+Changes:
+Figure 3 (Page 11): Added Error vs. Density plot.
+Figure 4 (Page 12): Added Parity Plots.
 
-**Response:** We added an **"Implications"** paragraph in the Conclusion section. We explicitly state: "For logistics operators, this capability enables 'what-if' analysis... For traffic managers, it provides a data-driven digital twin..."
+Comment 9: The authors should revise the writing for clarity and flow: there are several long sentences, some typos (e.g., “Oerator learning”), and dense paragraphs that could be split; a careful language edit would make the paper much more readable.
 
-**Changes:** Added the "Implications" section in the Conclusion. (Section 6, Lines 680-685)
+Response:
+We have performed a thorough proofreading of the manuscript. We corrected the specific typo "Oerator learning" to "Operator learning" and addressed other identified errors (e.g., "entred", author name misspellings). We also improved sentence flow and standardized formatting throughout the text.
 
----
-Thank you for your valuable time; the quality of my paper has significantly improved thanks to your comments.
+Changes:
+Throughout: Comprehensive language editing.
+
+Comment 10: I suggest to the authors to connect more explicitly to potential users: for example, add a short subsection or paragraph explaining how traffic engineers or logistics planners could plug this model into routing, signal control, or digital-twin systems, and what additional steps (calibration, uncertainty estimation) would be needed before deployment.
+
+Response:
+We have added a "Practical Implications" paragraph in the Conclusion.
+1.  Use Cases: We explicitly mention "what-if" analysis for routing strategies and "digital twin" for traffic management.
+2.  Deployment: We note that future work on "uncertainty estimation" (e.g., conformal prediction) and "Sim2Real" transfer is needed for full deployment.
+
+Changes:
+Section 6 (Page 14, Lines 730-740): Added Practical Implications for engineers and planners.

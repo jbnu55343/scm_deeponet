@@ -1,79 +1,67 @@
-# Response to Reviewers
+Response to Reviewer 2
 
-We thank the reviewers for their insightful comments and constructive suggestions. We have carefully revised the manuscript to address all points raised. Below is a point-by-point response to the reviews.
+We appreciate the reviewer's insightful comments on the theoretical justification, methodological transparency, and external validity of our work. We have made substantial revisions to the manuscript to address these concerns.
 
-**General Note on Data Processing and Performance Metrics:**
-We would like to clarify a change in the reported performance metrics compared to the previous submission. In the initial version, the simulation dataset included zero-values (representing empty road segments), which artificially inflated the prediction accuracy as these trivial cases were easy to predict. In this revision, we have rigorously cleaned the dataset by removing these zero-values to focus on non-trivial traffic dynamics. Consequently, the overall prediction task has become more challenging, resulting in slightly lower absolute performance metrics compared to the first draft. However, these new results more accurately reflect the model's capability to handle complex, realistic traffic flow regimes.
+Comment 1: The adoption of DeepONet is justified primarily by its capability to handle distributional and boundary shifts. Yet the theoretical rationale for using a branch-trunk factorization with a multiplicative inner product is insufficiently developed. The manuscript does not convincingly demonstrate why this particular formulation is more appropriate for the forecasting problem than a standard concatenation of historical and contextual features in a conventional MLP. How does the multiplicative coupling explicitly capture nonlinear dependencies between density and speed that additive structures might overlook? Articulating this mechanism—ideally by linking it to established traffic-flow theories or operator-learning principles—would substantially enhance the conceptual coherence of the paper.
 
----
+Response:
+We have significantly strengthened the theoretical justification in the revised manuscript.
+1. Operator Learning vs. Vector Mapping: We clarified in Section 2.2 that the Branch-Trunk architecture is designed to approximate a continuous operator, not just a vector-to-vector mapping. The dot product represents a generalized Fourier series expansion, where the Branch network learns the coefficients (dependent on the input function/history) and the Trunk network learns the basis functions (dependent on the coordinate/context).
+2. Multiplicative Coupling: We added a discussion in Section 2.3 explaining that the multiplicative interaction allows the model to modulate the influence of historical dynamics (Branch) based on the current boundary conditions (Trunk), effectively capturing the non-linear state-dependency of traffic flow (e.g., the fundamental diagram relationships) better than simple additive concatenation.
+3. Comparison: We added Section 2.4 to explicitly compare this with MLP and GNN approaches.
 
-## Reviewer 2
+Changes:
+Section 2.3 (Page 4, Lines 273-290): Added "Physical Interpretation of the Architecture" explaining the multiplicative coupling.
+Section 2.4 (Page 4, Lines 306-318): Added comparison with classical and geometric deep learning.
 
-### Comment 7: Lack of Real-World Validation
-**Comment:** The study relies heavily on SUMO simulation data. The lack of validation on real-world traffic data weakens the claims of applicability.
+Comment 2: Although the paper briefly describes the structure of the branch and trunk networks, the analytical pathway from raw data to model inputs remains opaque. To strengthen methodological transparency, the authors should provide an illustrative table or appendix clarifying how lagged speed sequences and contemporaneous features were transformed into the two input streams. More explicit correspondence between specific input variables and higher-level constructs—such as “congestion intensity” or “boundary constraint”—would allow readers to better understand the analytical logic underpinning the model design and improve reproducibility.
 
-**Response:**
-We fully accept this critique and have addressed it by conducting a comprehensive validation on the **METR-LA real-world dataset**. We added a new section (Module 3) detailing these experiments. The results demonstrate that DeepONet not only generalizes well in simulation but also achieves state-of-the-art performance ($R^2=0.917$) on real-world data, outperforming standard baselines. This empirical evidence strongly supports the practical applicability of our proposed framework.
+Response:
+We have improved the transparency of the data processing and model inputs:
+1. Pseudocode: We added Algorithm 1, which details the step-by-step transformation of raw data into Branch (u) and Trunk (y) inputs.
+2. Input Mapping: In Section 2.3, we explicitly map the inputs to physical constructs: the Branch input (lagged speed) represents the "system inertia," and the Trunk input (density, occupancy, time) represents the "boundary conditions" and "congestion intensity."
 
-**Changes:**
-This is the most significant addition to the revision. We have added a completely new experimental module: **"Module 3: Real-World Validation on METR-LA"**. (Section 5.4, Lines 615-645)
-1.  **Dataset:** We utilized the METR-LA benchmark dataset (207 sensors, Los Angeles highway network).
-2.  **Experiment:** We trained DeepONet and baselines (MLP, GNN, Transformer) on this complex, real-world graph.
-3.  **Results:** We report that DeepONet achieves **State-of-the-Art (SOTA) performance ($R^2 \approx 0.917$)**, significantly outperforming the MLP baseline ($R^2 \approx 0.85$) and matching or beating the Transformer ($R^2 \approx 0.914$).
-4.  **Analysis:** We discuss how this result validates the model's robustness in complex, non-linear real-world topologies, addressing the limitation of the linear simulation.
+Changes:
+Algorithm 1 (Page 9, Lines 518-538): Added "DeepONet Training and Inference for Traffic Speed Forecasting".
+Section 2.3 (Page 4, Lines 273-290): Clarified the physical correspondence of inputs.
 
----
+Comment 3: The analysis relies entirely on synthetic data generated via SUMO simulations. While this allows controlled experimentation, it raises concerns about external validity and real-world transferability. The paper does not indicate whether simulated link speeds were benchmarked against empirical traffic data or validated against known speed–density relationships. Were any cross-checks performed to assess the realism of the simulated states? If such validation was not conducted, this limitation should be explicitly acknowledged, together with a discussion of how it may affect the robustness of the model when applied to noisy or incomplete real-world sensor data.
 
-### Comment 8: Baseline Models
-**Comment:** The baseline models (Ridge, MLP, simple LSTM) are too basic. Modern baselines like GNNs or Transformers should be included.
+Response:
+We agree that reliance on synthetic data was a limitation. To address this, we have incorporated a real-world dataset:
+1. METR-LA Dataset: We added the METR-LA benchmark (Section 4.3), a widely used real-world traffic dataset, to validate our model.
+2. Validation Results: We added Section 5.4, presenting the performance of DeepONet on this real-world data. The results confirm that the model generalizes well to real-world noise and complexity, achieving high accuracy ($R^2 \approx 0.91$).
+3. Robustness: We also performed perturbation tests (Figure 5) to simulate noisy sensor data, demonstrating the model's stability.
 
-**Response:**
-We agree that stronger baselines were needed. We have implemented and evaluated two state-of-the-art models: a **Graph Neural Network (GNN)** and a **Transformer**. The revised manuscript now includes a comprehensive performance comparison (Table 1) against these advanced architectures. The results show that while GNNs and Transformers are competitive, DeepONet offers a superior balance of accuracy and parameter efficiency, particularly in the real-world METR-LA task.
+Changes:
+Section 4.3 (Page 7, Lines 419-423): Added description of the METR-LA dataset.
+Section 5.4 (Page 12, Lines 629-645): Added "Real-World Validation" results.
 
-**Changes:**
-We have expanded the baseline comparison significantly:
-1.  **GNN (Graph Neural Network):** We implemented and evaluated a GNN baseline (GCN/GraphSAGE) for both the simulation (Module 2) and real-world (Module 3) experiments. (Section 4.4, Lines 435-445)
-2.  **Transformer:** We implemented a Transformer model for time-series forecasting and included it in the comparison. (Section 4.4, Lines 430-435)
-3.  **Comparison:** We added a new summary table (Table 1) that compares DeepONet against MLP, GNN, and Transformer across all datasets. (Table 2, Section 5.1)
+Comment 4: The proposed approach models each road link independently, overlooking the spatial dependencies that are fundamental to traffic dynamics. This simplification is neither theoretically justified nor empirically evaluated. Given that adjacent links—particularly upstream and downstream segments—exhibit strong spatial correlations, how do the authors reconcile this assumption with established spatiotemporal modeling approaches, such as graph-based neural networks or diffusion models? A brief theoretical discussion clarifying why a non-spatial treatment is suitable for this context, or an explicit acknowledgment of this as a boundary condition, would enhance the study’s conceptual rigor.
 
----
+Response:
+We have addressed the spatial dependency issue in two ways:
+1. Baseline Comparison: We added a Graph Neural Network (GNN) baseline (Section 4.4) to empirically evaluate the trade-off.
+2. Theoretical Discussion: In Section 2.4 and the Conclusion, we explain that while DeepONet treats links via their boundary conditions (Trunk inputs), it implicitly captures local spatial effects through these boundary variables (e.g., density/occupancy). However, we explicitly acknowledge the lack of explicit graph convolution as a limitation and propose integrating Graph Neural Operators (GNO) in future work.
 
-### Comment 9: Grammar and Typos
-**Comment:** There are several grammatical errors and typos throughout the text.
+Changes:
+Section 4.4 (Page 7, Lines 424-493): Added GNN baseline description.
+Section 6 (Page 14, Lines 738-754): Acknowledged the limitation regarding explicit spatial modeling.
 
-**Response:**
-We have conducted another round of careful proofreading of the entire manuscript. We corrected specific typos in the Author Contributions section (e.g., "Bin Yun" to "Bin Yu"), standardized the formatting of author affiliations and citations, and ensured that all grammatical errors identified in previous comments (e.g., "Oerator", "entred") have been resolved. We also verified the consistency of tense and article usage throughout the text.
+Comment 5: The ablation and counterfactual analyses contribute useful insights but tend to present a predominantly positive narrative. For example, the nearly flat response to waitingTime in Figure 5 deserves closer interpretation—does it imply redundancy of this variable, or does it reflect a limitation in how the model captures its effect? Were there instances in which counterfactual perturbations produced implausible or unstable outcomes? Discussing these edge cases, rather than omitting them, would make the interpretability claims more balanced and convincing.
 
-**Changes:**
-1.  Corrected typos in the **Author Contributions** section (misspelling of author name "Bin Yun" corrected to "Bin Yu"). (Author Contributions, Line 695)
-2.  Standardized spacing and punctuation in the **Author List** and **Citations**.
-3.  Verified the correction of specific typos mentioned by other reviewers (e.g., "Oerator", "entred").
-4.  Performed a final pass to improve sentence flow and readability.
+Response:
+We have expanded the discussion of the ablation study in Section 5.5.
+1. waitingTime: We explicitly discuss the flat response to waitingTime, interpreting it as a sign of redundancy given that 'density' and 'occupancy' already capture the congestion state effectively in this free-flow dominated scenario.
+2. Edge Cases: We added a discussion on the model's behavior under extreme perturbations (e.g., zero density but low speed), noting that while the model generally remains stable, its predictions can deviate from physical laws in these unseen regimes, highlighting the need for physics-informed constraints in future iterations.
 
----
+Changes:
+Section 5.4 (Page 13, Lines 700-730): Expanded discussion on feature importance and edge cases.
 
-### Comment 10: Conclusion and Limitations
-**Comment:** The conclusion is generic. It should discuss limitations and future work more concretely.
+Comment 6: The discussion of hyperparameter tuning lacks the methodological detail.
 
-**Response:**
-We have revised the Conclusion to provide a more balanced and in-depth summary. We explicitly discuss the limitations of our current approach, particularly regarding explicit topological modeling, and outline concrete directions for future research, such as exploring Graph Neural Operators and Physics-Informed Neural Networks (PINNs).
+Response:
+We have added a detailed description of our hyperparameter tuning process. We utilized a grid search strategy for key parameters such as the number of branch/trunk layers, neurons per layer, and learning rate. We have included a summary of the search space and the optimal configuration selected.
 
-**Changes:**
-We have rewritten the **Conclusion** section. (Section 6, Lines 680-690)
-1.  **Summary:** We summarized the key finding: DeepONet excels in complex, real-world scenarios (METR-LA) while remaining robust in simpler simulations.
-2.  **Limitations:** We integrated a discussion of limitations, acknowledging that the current model does not explicitly encode graph topology (unlike GNNs) and relies on aggregated link-level features.
-3.  **Future Work:** We outlined future directions, including the integration of Graph Neural Operators and the incorporation of physical constraints via **PINNs** to enhance interpretability.
-
----
-
-### Comment 11: Reference Formatting
-**Comment:** The references are not formatted consistently.
-
-**Response:**
-We have reformatted the bibliography to strictly adhere to the journal's citation guidelines, ensuring consistency and completeness for all references.
-
-**Changes:**
-We have standardized all references according to the journal's specific citation style (e.g., MDPI style). We checked for completeness (DOI, volume, issue, page numbers) and consistency in author name formatting. (Bibliography)
-
----
-Thank you for your valuable time; the quality of my paper has significantly improved thanks to your comments.
+Changes:
+Section 4.5 (Page 8, Lines 503-505): Added details on hyperparameter tuning and the final configuration used.

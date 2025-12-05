@@ -63,15 +63,19 @@ We have reviewed the entire manuscript and ensured that all mathematical equatio
 
 ---
 
-### Comment 5: Physical Interpretation of DeepONet
-**Comment:** The physical meaning of the "Branch" and "Trunk" inputs in the context of traffic flow is not clearly explained.
+### Comment 5: DeepONet Methodology
+**Comment:** Insufficient rigor in DeepONet methodology: (1) The correspondence between branch/trunk inputs and physical traffic variables is unclear. (2) Algorithmic pseudocode is missing, and some variables are inconsistently defined between text and formulas. (3) The concept of “functional inputs” is mentioned but not explained in the traffic context, and appears only in the abstract and contribution sections.
 
 **Response:**
-We agree that the physical interpretation is crucial. We have added a dedicated subsection to clarify this and included a new schematic diagram. We explicitly map the "Branch" network to the temporal history (system inertia) and the "Trunk" network to the contemporaneous context (boundary conditions). This formulation aligns with the operator learning perspective, where the model approximates the mapping from the historical state trajectory to the future state, modulated by the environmental boundary conditions.
+We agree that the methodology required more rigor.
+(1) **Physical Interpretation:** We have added a dedicated subsection (4.5) and a new schematic diagram (Figure 1) to explicitly map the "Branch" network to the temporal history (system inertia) and the "Trunk" network to the contemporaneous context (boundary conditions).
+(2) **Pseudocode:** We have added a detailed algorithmic pseudocode (Algorithm 1) in Section 4.5 to clarify the training and inference procedures, ensuring variable consistency between the text and the algorithm.
+(3) **Functional Inputs:** We have clarified the concept of "functional inputs" in the traffic context, explaining how the historical speed sequence acts as the input function $u$ that defines the system's state, which the operator maps to the future state.
 
 **Changes:**
 1.  **New Figure:** We added **Figure 1 (Schematic of DeepONet Architecture)** in Section 4.4, which visually illustrates the Branch (History) and Trunk (Context) separation and their interaction via the dot product. (Section 4.5, Figure 3, Lines 495-500)
 2.  **Textual Explanation:** We explicitly define the branch inputs as the "historical speed sequence" ($\mathbf{s}_{t-L+1:t}$), representing the temporal inertia, and the trunk inputs as the "contemporaneous context" ($\mathbf{u}_t$), representing boundary conditions. (Section 4.5, Lines 505-515)
+3.  **Pseudocode:** We added **Algorithm 1** in Section 4.5 to detail the training and inference steps.
 
 ---
 
