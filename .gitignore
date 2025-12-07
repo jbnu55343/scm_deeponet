@@ -32,3 +32,4 @@ net/*.net.xml
 models/*.pt
 artifacts/
 data/*.zip
+wandb/
